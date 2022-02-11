@@ -8,6 +8,14 @@ set -eo
 # IMPORTANT: while secrets are encrypted and not viewable in the GitHub UI,
 # they are by necessity provided as plaintext in the context of the Action,
 # so do not echo or use debug mode unless you want your secrets exposed!
+if [[ -z "$README_NAME" ]]; then
+	README_NAME="readme.txt"
+fi
+if [[ -z "$SVN_USERNAME" ]]; then
+	echo "Set the SVN_USERNAME secret"
+	SVN_USERNAME=`grep  "^Contributors:[^\s]*" $README_NAME | awk '$1=="Contributors:"{print $2}' | tr -d ','`
+fi
+
 if [[ -z "$SVN_USERNAME" ]]; then
 	echo "Set the SVN_USERNAME secret"
 	exit 1
@@ -29,9 +37,6 @@ if [[ -z "$ASSETS_DIR" ]]; then
 fi
 echo "ℹ︎ ASSETS_DIR is $ASSETS_DIR"
 
-if [[ -z "$README_NAME" ]]; then
-	README_NAME="readme.txt"
-fi
 echo "ℹ︎ README_NAME is $README_NAME"
 
 if [[ -z "$IGNORE_OTHER_FILES" ]]; then
