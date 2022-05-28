@@ -119,7 +119,6 @@ if [[ -d "$GITHUB_WORKSPACE/$ASSETS_DIR/" ]]; then
 	convert -resize 256x256 $GITHUB_WORKSPACE/$ASSETS_DIR/icon.png $GITHUB_WORKSPACE/$ASSETS_DIR/icon-256x256.png
 	convert -resize 128x128 $GITHUB_WORKSPACE/$ASSETS_DIR/icon.png $GITHUB_WORKSPACE/$ASSETS_DIR/icon-128x128.png
 
-	rsync -rc "$GITHUB_WORKSPACE/$ASSETS_DIR/" assets/ --delete
 else
 	echo "ℹ︎ No assets directory found; skipping asset copy"
 fi
